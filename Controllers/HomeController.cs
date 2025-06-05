@@ -46,8 +46,21 @@ namespace MvcTodoApp.Controllers
         {
             var task = tasks.FirstOrDefault(t => t.Id == id);
             if (task != null)
+
                 task.IsComplete = true;
             return RedirectToAction("Index");
         }
+        [HttpPost]
+public IActionResult EditTask(TaskItem editedTask)
+{
+    var task = tasks.FirstOrDefault(t => t.Id == editedTask.Id);
+
+    if (task != null)
+    {
+        task.Title = editedTask.Title;
+        task.IsComplete = editedTask.IsComplete;
     }
+    return RedirectToAction("Index");
+}
+   }
 }
